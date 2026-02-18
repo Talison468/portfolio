@@ -1,1 +1,268 @@
-<h1>Que incrivel meu portfolio🥳</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Futurista | Dev Fullstack</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-purple: #7000ff;
+            --dark-bg: #020205;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Canvas do Three.js fixo ao fundo */
+        #bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            padding: 10vh 10%;
+        }
+
+        /* Cabeçalho */
+        header {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px var(--neon-blue);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--neon-purple);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Seções */
+        section {
+            margin-bottom: 150px;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--neon-purple);
+            padding-left: 15px;
+        }
+
+        /* Grid de Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            padding: 30px 10px;
+            text-align: center;
+            border-radius: 10px;
+            transition: 0.4s;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .skill-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+            transform: translateY(-10px);
+        }
+
+        /* Grid de Projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(112, 0, 255, 0.05);
+            border: 1px solid rgba(112, 0, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            background: rgba(112, 0, 255, 0.1);
+            border-color: var(--neon-purple);
+        }
+
+        .project-card h3 {
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+        }
+
+        .project-card p {
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        /* Scrollbar customizada */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--neon-purple); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg"></canvas>
+
+    <main>
+        <header>
+            <p class="subtitle">Sistemas & Web</p>
+            <h1>DEVELOPER</h1>
+            <p>Especialista em criar soluções robustas com Java e interfaces imersivas.</p>
+        </header>
+
+        <section id="skills">
+            <h2>Habilidades Core</h2>
+            <div class="skills-grid">
+                <div class="skill-card">Java</div>
+                <div class="skill-card">HTML5</div>
+                <div class="skill-card">CSS3</div>
+                <div class="skill-card">JS</div>
+                <div class="skill-card">MySQL</div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projetos em Destaque</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>API Rest Enterprise</h3>
+                    <p>Sistema escalável construído em Java com persistência em MySQL e documentação Swagger.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Dashboard Futurista</h3>
+                    <p>Interface de monitoramento em tempo real utilizando CSS Grid e animações avançadas.</p>
+                </div>
+                <div class="project-card">
+                    <h3>DB Optimizer</h3>
+                    <p>Ferramenta de automação para queries complexas e gestão de banco de dados MySQL.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // --- CONFIGURAÇÃO THREE.JS ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector('#bg'),
+            antialias: true,
+            alpha: true
+        });
+
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.setZ(30);
+
+        // Criando as "Bolhas" e Partículas
+        const bubbles = [];
+        function addBubble() {
+            const geometry = new THREE.IcosahedronGeometry(Math.random() * 0.8, 1);
+            const material = new THREE.MeshStandardMaterial({ 
+                color: Math.random() > 0.5 ? 0x00f2ff : 0x7000ff,
+                wireframe: true 
+            });
+            const bubble = new THREE.Mesh(geometry, material);
+
+            const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
+            bubble.position.set(x, y, z);
+            scene.add(bubble);
+            bubbles.push(bubble);
+        }
+        Array(150).fill().forEach(addBubble);
+
+        // Iluminação
+        const pointLight = new THREE.PointLight(0xffffff);
+        pointLight.position.set(20, 20, 20);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(pointLight, ambientLight);
+
+        // Estrelas de fundo
+        function addStar() {
+            const geometry = new THREE.SphereGeometry(0.1, 24, 24);
+            const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+            const star = new THREE.Mesh(geometry, material);
+            const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
+            star.position.set(x, y, z);
+            scene.add(star);
+        }
+        Array(200).fill().forEach(addStar);
+
+        // Animação ao Scroll
+        function moveCamera() {
+            const t = document.body.getBoundingClientRect().top;
+            camera.position.z = 30 + (t * 0.02);
+            camera.position.y = t * -0.002;
+            camera.rotation.y = t * -0.0005;
+        }
+        document.body.onscroll = moveCamera;
+
+        // Loop de Renderização
+        function animate() {
+            requestAnimationFrame(animate);
+
+            bubbles.forEach(b => {
+                b.rotation.x += 0.005;
+                b.rotation.y += 0.005;
+                b.position.y += 0.01;
+                if(b.position.y > 50) b.position.y = -50;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Responsividade
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
