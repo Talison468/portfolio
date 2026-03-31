@@ -276,6 +276,24 @@
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
 }
+.project-card {
+    display: flex;
+    flex-direction: column; /* empilha o conteúdo verticalmente */
+    align-items: center;    /* centraliza tudo horizontalmente */
+    text-align: center;     /* centraliza o texto */
+}
+
+.project-card img {
+    display: block;         /* transforma a imagem em bloco */
+    margin: 20px auto 0;    /* 20px de espaço acima da imagem e centraliza */
+    max-width: 100%;        /* não deixa a imagem ultrapassar o card */
+    border-radius: 10px;    /* opcional, cantos arredondados */
+}
+
+/* Espaçamento entre várias imagens dentro do mesmo card */
+.project-card img + img {
+    margin-top: 20px;
+}
 
 /* Hover: agora ciano (neon-blue) igual skills/contact */
 .project-card:hover {
