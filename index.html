@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Portfolio </title>
+    <title>Talison Borges Cardoso | Desenvolvedor Fullstack</title>
     
+    <!-- Bibliotecas e Fontes -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --neon-blue: #00f2ff;
@@ -21,7 +25,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth; /* Rolagem suave ao clicar no menu */
+            scroll-behavior: smooth;
         }
 
         body {
@@ -35,30 +39,35 @@
             position: fixed;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
         }
 
-        /* --- MENU DE NAVEGAÇÃO --- */
+        /* --- NAVBAR RESPONSIVO --- */
         nav {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            padding: 20px 0;
-            background: rgba(2, 2, 5, 0.8);
-            backdrop-filter: blur(10px);
+            padding: 18px 20px;
+            background: rgba(2, 2, 5, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-glass);
             z-index: 100;
             display: flex;
             justify-content: center;
-            gap: 30px;
+            align-items: center;
+            gap: 28px;
         }
 
         nav a {
-            color: #fff;
+            color: #dcdcdc;
             text-decoration: none;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
             transition: 0.3s;
             text-transform: uppercase;
         }
@@ -68,51 +77,62 @@
             text-shadow: 0 0 10px var(--neon-blue);
         }
 
-        /* --- HOME (CENTRALIZADO) --- */
+        /* --- HERO --- */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 100px 20px 40px;
         }
 
-       h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(2.5rem, 10vw, 6rem);
-    color: #dcdcdc; /* branco normal */
-    margin-bottom: 15px;
-    line-height: 1;
-}
+        .hero-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 6px;
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.2rem, 7vw, 4.8rem);
+            color: #f5f5f5;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            color: #eeeeee;
-            letter-spacing: 1px;
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            max-width: 650px;
+            color: #c7c9cb;
+            line-height: 1.5;
         }
 
         .highlight {
-            color: var(--neon-purple);
-            font-weight: bold;
+            color: var(--neon-blue);
+            font-weight: 700;
         }
 
-        /* --- SEÇÕES --- */
+        /* --- CONTEÚDO PRINCIPAL --- */
         main {
-            padding: 0 10%;
+            padding: 0 8%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         section {
-            padding: 100px 0;
-            min-height: 80vh;
+            padding: 90px 0;
+            min-height: 70vh;
         }
 
         h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            margin-bottom: 50px;
+            font-size: clamp(1.8rem, 4vw, 2.3rem);
+            margin-bottom: 45px;
             text-align: center;
             color: #fff;
             position: relative;
@@ -122,62 +142,13 @@
             content: '';
             display: block;
             width: 60px;
-            height: 4px;
-            background: var(--neon-purple);
-            margin: 10px auto;
-            box-shadow: 0 0 15px var(--neon-purple);
+            height: 3px;
+            background: var(--neon-blue);
+            margin: 12px auto 0;
+            box-shadow: 0 0 12px var(--neon-blue);
         }
 
-       /* --- GRID DE SKILLS --- */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* caixas menores */
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-/* --- CARDS --- */
-.skill-card {
-    background: var(--glass);
-    backdrop-filter: blur(5px);
-    border: 1px solid var(--border-glass);
-    padding: 25px 15px; /* diminuiu a altura da caixa */
-    text-align: center;
-    border-radius: 15px;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    font-weight: 700;
-    text-transform: uppercase;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.2rem; /* texto maior */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* --- HOVER --- */
-.skill-card:hover {
-    border-color: var(--neon-blue);
-    box-shadow: 0 0 40px rgba(0, 242, 255, 0.3);
-    transform: scale(1.1);
-    background: rgba(0, 242, 255, 0.1);
-}
-
-/* --- ÍCONES --- */
-.skill-card i {
-    font-size: 40px; /* ícone maior */
-    margin-bottom: 10px;
-    color: var(--neon-blue);
-    transition: 0.3s;
-}
-
-.skill-card:hover i {
-    transform: scale(1.2);
-    color: #fff;
-}
-
-        /* --- GRID DE PROJETOS --- */
+        /* --- PROJETOS --- */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -185,130 +156,201 @@
         }
 
         .project-card {
-            background: rgba(112, 0, 255, 0.02);
-            border: 1px solid rgb(102, 16, 240);
-            padding: 40px;
-            border-radius: 20px;
-            transition: 0.4s;
-            cursor: pointer;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            padding: 30px;
+            border-radius: 18px;
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .project-card:hover {
-            background: rgba(112, 0, 255, 0.08);
-            border-color: var(--neon-purple);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.25);
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 242, 255, 0.05);
         }
 
         .project-card h3 {
-            font-size: 1.7rem;
+            font-size: 1.6rem;
             color: var(--neon-blue);
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             font-family: 'Orbitron', sans-serif;
         }
 
         .project-card p {
-            font-size: 1.3rem;
-            color: #dfe0e0;
+            font-size: 1.15rem;
+            color: #d1d5db;
             line-height: 1.6;
-            margin-top: 15px;
+            margin-bottom: 20px;
         }
-        
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(112, 0, 255, 0.25);
+            border: 1px solid rgba(112, 0, 255, 0.6);
+            color: #d8b4fe;
+            letter-spacing: 1px;
+        }
+
+        .project-images {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: auto;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            object-fit: cover;
+        }
+
+        /* --- SKILLS --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: var(--glass);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--border-glass);
+            padding: 24px 15px;
+            text-align: center;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .skill-card i {
+            font-size: 2.2rem;
+            color: var(--neon-blue);
+            transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.25);
+            transform: translateY(-4px);
+            background: rgba(0, 242, 255, 0.08);
+        }
+
+        /* --- CONTATO --- */
         .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-}
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
 
-/* Todo o card agora é um link clicável */
-.contact-card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--glass);
-    backdrop-filter: blur(5px);
-    border: 1px solid var(--border-glass);
-    padding: 30px 20px;
-    border-radius: 15px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    color: #fff;
-    text-decoration: none;
-}
+        .contact-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--border-glass);
+            padding: 22px 18px;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            color: #fff;
+            text-decoration: none;
+        }
 
-.contact-card:hover {
-    border-color: var(--neon-blue);
-    box-shadow: 0 0 40px rgba(0, 242, 255, 0.3);
-    transform: scale(1.05);
-    background: rgba(0, 242, 255, 0.1);
-}
+        .contact-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.25);
+            transform: translateY(-3px);
+            background: rgba(0, 242, 255, 0.08);
+        }
 
-.contact-card h3 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 10px; /* espaço entre ícone e texto */
-    margin: 0;
-    color: #fff;
-}
+        .contact-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0;
+            color: #fff;
+        }
 
-.contact-card h3 i {
-    font-size: 2rem; /* ícone maior */
-    transition: 0.3s;
-}
+        .contact-card h3 i {
+            font-size: 1.6rem;
+            color: var(--neon-blue);
+        }
 
-.contact-card:hover h3 i {
-    color: var(--neon-blue); /* ícone também muda no hover */
-}
-
-.project-card {
-    background: rgba(255, 255, 255, 0.03); /* vidro */
-    backdrop-filter: blur(12px); /* efeito fosco */
-    -webkit-backdrop-filter: blur(12px); /* Safari */
-
-    border: 1px solid var(--border-glass);
-    padding: 40px;
-    border-radius: 20px;
-
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
-}
-.project-card {
-    display: flex;
-    flex-direction: column; /* empilha o conteúdo verticalmente */
-    align-items: center;    /* centraliza tudo horizontalmente */
-    text-align: center;     /* centraliza o texto */
-}
-
-.project-card img {
-    display: block;         /* transforma a imagem em bloco */
-    margin: 20px auto 0;    /* 20px de espaço acima da imagem e centraliza */
-    max-width: 100%;        /* não deixa a imagem ultrapassar o card */
-    border-radius: 10px;    /* opcional, cantos arredondados */
-}
-
-/* Espaçamento entre várias imagens dentro do mesmo card */
-.project-card img + img {
-    margin-top: 20px;
-}
-
-/* Hover: agora ciano (neon-blue) igual skills/contact */
-.project-card:hover {
-    border-color: var(--neon-blue);
-    box-shadow: 0 0 40px rgba(0, 242, 255, 0.3);
-    transform: scale(1.05);
-    background: rgba(0, 242, 255, 0.1); /* fundo ciano ao passar mouse */
-}
         /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
+
+        /* --- AJUSTES ESPECÍFICOS PARA CELULAR (MOBILE) --- */
+        @media (max-width: 600px) {
+            nav {
+                padding: 12px 10px;
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 0.72rem;
+                letter-spacing: 0.5px;
+            }
+
+            main {
+                padding: 0 5%;
+            }
+
+            section {
+                padding: 70px 0;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                padding: 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+        }
     </style>
 </head>
 <body>
-
     <nav>
         <a href="#home">Home</a>
         <a href="#projects">Projetos</a>
@@ -319,85 +361,96 @@
     <canvas id="bg"></canvas>
 
     <section id="home" class="hero">
-        <p style="letter-spacing: 8px; margin-bottom: 10px; opacity: 0.8;">SISTEMAS INTELIGENTES</p>
+        <p class="hero-tag">SISTEMAS INTELIGENTES</p>
         <h1>Talison Borges Cardoso</h1>
         <p>Desenvolvedor <span class="highlight">Fullstack</span> com foco na criação de aplicações web modernas, funcionais e bem estruturadas.</p>
     </section>
 
     <main>
-
         <section id="projects">
             <h2>Meus Projetos</h2>
             <div class="projects-grid">
-
                 <div class="project-card">
-                    <div class="project-image"></div>
-                    <h3>Agenda de Eventos</h3>
-
-                    <p>
-                        Aplicação web para gerenciamento de eventos, permitindo cadastro, edição e visualização de compromissos.
-                        Desenvolvida com HTML, CSS, JavaScript e integração com banco de dados MySQL.
-                    </p>
+                    <div>
+                        <h3>Agenda de Eventos</h3>
+                        <p>
+                            Aplicação web para gerenciamento de eventos, permitindo cadastro, edição e visualização de compromissos com persistência em banco relacional.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">MySQL</span>
+                        </div>
+                    </div>
                     
-                    <img src="https://github.com/Talison468/portfolio/blob/main/Captura%20de%20tela%202026-03-25%20164722.png?raw=true" width="600" alt="Print do projeto"/>
-                    <img src="https://github.com/Talison468/portfolio/blob/main/Captura%20de%20tela%202026-03-25%20164707.png?raw=true" width="375" alt="Print do projeto"/>
+                    <div class="project-images">
+                        <img src="https://github.com/Talison468/portfolio/blob/main/Captura%20de%20tela%202026-03-25%20164722.png?raw=true" alt="Agenda de Eventos - Visão Geral"/>
+                        <img src="https://github.com/Talison468/portfolio/blob/main/Captura%20de%20tela%202026-03-25%20164707.png?raw=true" alt="Agenda de Eventos - Detalhes"/>
+                    </div>
                 </div>
+
                 <div class="project-card">
-                <h3>Nike e commerce</h3>
-                <p>
-                    Projeto de interface inspirado em um e-commerce da Nike, com foco em estruturação de layout e organização visual.
-                    Desenvolvido utilizando HTML e CSS.
-                </p>
-                <img src="https://github.com/Talison468/portfolio/blob/main/Captura%20de%20tela%202026-03-25%20171607.png?raw=true" width="600" alt="Print do projeto"/>
-                <img src="https://github.com/Talison468/portfolio/blob/main/Captura%20de%20tela%202026-03-25%20171626.png?raw=true" width="600" alt="Print do projeto"/>
-        </div>
+                    <div>
+                        <h3>Nike E-Commerce</h3>
+                        <p>
+                            Interface inspirada no e-commerce da Nike, com design limpo, grid responsivo e foco em experiência do usuário.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">Flexbox / Grid</span>
+                        </div>
+                    </div>
+
+                    <div class="project-images">
+                        <img src="https://github.com/Talison468/portfolio/blob/main/Captura%20de%20tela%202026-03-25%20171607.png?raw=true" alt="Nike E-commerce - Página Principal"/>
+                        <img src="https://github.com/Talison468/portfolio/blob/main/Captura%20de%20tela%202026-03-25%20171626.png?raw=true" alt="Nike E-commerce - Visualização Mobile"/>
+                    </div>
+                </div>
+            </div>
         </section>
         
         <section id="skills">
-    <h2>Habilidades</h2>
-    <div class="skills-grid">
-        <div class="skill-card">
-            <i class="fa-brands fa-java"></i>
-            Java
-        </div>
-        <div class="skill-card">
-            <i class="fa-brands fa-html5"></i>
-            HTML
-        </div>
-        <div class="skill-card">
-            <i class="fa-brands fa-css3-alt"></i>
-            CSS
-        </div>
-        <div class="skill-card">
-            <i class="fa-brands fa-js"></i>
-            JavaScript
-        </div>
-        <div class="skill-card">
-            <i class="fa-solid fa-database"></i>
-            MySQL
-        </div>
-    </div>
-</section>
+            <h2>Habilidades</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fa-brands fa-java"></i>
+                    Java
+                </div>
+                <div class="skill-card">
+                    <i class="fa-brands fa-html5"></i>
+                    HTML
+                </div>
+                <div class="skill-card">
+                    <i class="fa-brands fa-css3-alt"></i>
+                    CSS
+                </div>
+                <div class="skill-card">
+                    <i class="fa-brands fa-js"></i>
+                    JavaScript
+                </div>
+                <div class="skill-card">
+                    <i class="fa-solid fa-database"></i>
+                    MySQL
+                </div>
+            </div>
+        </section>
+
         <section id="contact">
-    <h2>Contato</h2>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <div class="contact-grid">
-        
-        <a class="contact-card" href="mailto:talisonbcardoso30@gmail.com">
-            <h3><i class="fa-solid fa-envelope"></i> Gmail</h3>
-        </a>
-
-        <a class="contact-card" href="https://www.linkedin.com/in/talison-borges-cardoso-a17a58333" target="_blank">
-            <h3><i class="fa-brands fa-linkedin"></i> LinkedIn</h3>
-        </a>
-
-        <a class="contact-card" href="https://github.com/Talison468" target="_blank">
-            <h3><i class="fa-brands fa-github"></i> GitHub</h3>
-        </a>
-
-    </div>
-</section>
+            <h2>Contato</h2>
+            <div class="contact-grid">
+                <a class="contact-card" href="mailto:talisonbcardoso30@gmail.com">
+                    <h3><i class="fa-solid fa-envelope"></i> Gmail</h3>
+                </a>
+                <a class="contact-card" href="https://www.linkedin.com/in/talison-borges-cardoso-a17a58333" target="_blank">
+                    <h3><i class="fa-brands fa-linkedin"></i> LinkedIn</h3>
+                </a>
+                <a class="contact-card" href="https://github.com/Talison468" target="_blank">
+                    <h3><i class="fa-brands fa-github"></i> GitHub</h3>
+                </a>
+            </div>
+        </section>
     </main>
 
     <script>
@@ -410,11 +463,12 @@
             alpha: true
         });
 
-        renderer.setPixelRatio(window.devicePixelRatio);
+        // Limita o pixel ratio a 2 para não pesar no celular
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setSize(window.innerWidth, window.innerHeight);
         camera.position.setZ(35);
 
-        // Criando Bolhas/Partículas Geométricas
+        // Bolhas/Partículas Geométricas
         const objects = [];
         function addObject() {
             const geometry = new THREE.OctahedronGeometry(Math.random() * 0.7, 0);
@@ -423,18 +477,17 @@
                 wireframe: true 
             });
             const mesh = new THREE.Mesh(geometry, material);
-
             const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
             mesh.position.set(x, y, z);
             scene.add(mesh);
             objects.push(mesh);
         }
-        Array(120).fill().forEach(addObject);
+        Array(90).fill().forEach(addObject);
 
-        // Luzes
+        // Iluminação
         const pointLight = new THREE.PointLight(0xffffff, 1);
         pointLight.position.set(10, 10, 10);
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
         scene.add(pointLight, ambientLight);
 
         // Animação ao rolar
@@ -448,20 +501,16 @@
         // Loop de Animação
         function animate() {
             requestAnimationFrame(animate);
-
             objects.forEach((obj, i) => {
-                obj.rotation.x += 0.003;
-                obj.rotation.y += 0.003;
-                // Movimento suave de flutuação
-                obj.position.y += Math.sin(Date.now() * 0.001 + i) * 0.01;
+                obj.rotation.x += 0.0025;
+                obj.rotation.y += 0.0025;
+                obj.position.y += Math.sin(Date.now() * 0.001 + i) * 0.008;
             });
-
             renderer.render(scene, camera);
         }
-
         animate();
 
-        // Responsividade
+        // Responsividade da tela
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
