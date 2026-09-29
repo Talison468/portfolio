@@ -347,6 +347,132 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
+            /* --- BOTÃO SOBRE MIM NO HERO --- */
+.btn-about {
+    margin-top: 25px;
+    padding: 12px 28px;
+    background: rgba(0, 242, 255, 0.08);
+    border: 1px solid var(--neon-blue);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-about i {
+    color: var(--neon-blue);
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.btn-about:hover {
+    background: var(--neon-blue);
+    color: #020205;
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.6);
+    transform: translateY(-3px);
+}
+
+.btn-about:hover i {
+    color: #020205;
+}
+
+/* --- MODAL FLUTUANTE (SOBRE MIM) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 2, 5, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: rgba(12, 12, 25, 0.95);
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 40px rgba(0, 242, 255, 0.3);
+    border-radius: 20px;
+    max-width: 480px;
+    width: 100%;
+    padding: 35px 30px;
+    position: relative;
+    transform: scale(0.85);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-close:hover {
+    color: var(--neon-blue);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.modal-header i {
+    font-size: 1.8rem;
+    color: var(--neon-blue);
+}
+
+.modal-header h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    margin: 0;
+}
+
+.modal-content p {
+    font-size: 1.25rem;
+    color: #d1d5db;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.modal-content strong {
+    color: var(--neon-blue);
+}
         }
     </style>
 </head>
@@ -364,6 +490,10 @@
         <p class="hero-tag">SISTEMAS INTELIGENTES</p>
         <h1>Talison Borges Cardoso</h1>
         <p>Desenvolvedor <span class="highlight">Fullstack</span> com foco na criação de aplicações web modernas, funcionais e bem estruturadas.</p>
+        
+        <button id="openAbout" class="btn-about">
+        <i class="fa-solid fa-terminal"></i> Sobre Mim
+        </button>
     </section>
 
     <main>
@@ -516,6 +646,39 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
+
+        // Controle do Modal Sobre Mim
+const aboutBtn = document.querySelector('#openAbout');
+const aboutModal = document.querySelector('#aboutModal');
+const closeBtn = document.querySelector('#closeAbout');
+
+aboutBtn.addEventListener('click', () => {
+    aboutModal.classList.add('active');
+});
+
+closeBtn.addEventListener('click', () => {
+    aboutModal.classList.remove('active');
+});
+
+aboutModal.addEventListener('click', (e) => {
+    if (e.target === aboutModal) {
+        aboutModal.classList.remove('active');
+    }
+});
+
     </script>
+    <div id="aboutModal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close" id="closeAbout">&times;</button>
+        <div class="modal-header">
+            <i class="fa-solid fa-id-card"></i>
+            <h3>Sobre Mim</h3>
+        </div>
+        <p>
+            Me chamo <strong>Talison</strong>, tenho 18 anos, fiz um curso técnico no Senai sobre desenvolvimento de software e estou cursando o terceiro ano do ensino médio.
+        </p>
+    </div>
+</div>
+    
 </body>
 </html>
